@@ -20,7 +20,7 @@ public interface Tree {
 		public Node(int key) {
 			this.key = key;
 		}
-
+		
 		public int getKey() {
 			return key;
 		}
@@ -32,7 +32,9 @@ public interface Tree {
 		public Node getRightChild() {
 			return rightChild;
 		}
-
+		public void setKey(int newKey){
+			key = newKey;
+		}
 		public void setLeftChild(Node newChild) {
 			leftChild = newChild;
 		}
