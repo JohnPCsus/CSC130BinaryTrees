@@ -60,6 +60,11 @@ public class BinarySearchTreeTests {
 		testTree.remove(3);
 		assertFalse(testTree.contains(3));
 		
+		for( int j : new int[]{4,2,6,1,3,5,7}){
+			testTree.insert(j);
+		}
+		testTree.remove(4);
+		assertFalse(testTree.contains(4));
 		
 	}
 
