@@ -62,49 +62,46 @@ public class BinarySearchTree implements Tree {
 
 	@Override
 	public void remove(int key) {
-		if (!contains(key)) {
-			return;
-		} else if (key == root.getKey() && hasChildren(root)) {
-			nodeRemover(root);
-		} else if (key == root.getKey()) {
+		Node n0 = null;
+		Node n1 = root;
+		//boolean found = false;
+		if(key == root.getKey()){
 			root = null;
 			return;
-		} else {
-			removeSearcher(key, root);
+		}
+		while (n1 != null) {
+			if (n1.getKey() == key) {
+				nodeRemover(n0, n1);
+				n1 = null;
+			} else {
+				n0 = n1;
+				n1 = key > n1.getKey() ? n1.getRightChild() : n1.getLeftChild();
+			}
 		}
 	}
 
-	private void removeSearcher(int key, Node n) {
-		if (key > n.getKey()) {
-			if (n.getRightChild() == null) {
-				return;
-			} else if (key == n.getRightChild().getKey()) {
-				if (hasChildren(n.getRightChild())) {
-					nodeRemover(n.getRightChild());
-				} else {
-					n.setRightChild(null);
-				}
-			} else {
-				removeSearcher(key, n.getRightChild());
-			}
+	private void nodeRemover(Node n0, Node n1) {
+		if (n0 == null) {
+			root = null;
+			return;
+		}
+		if (n1.getRightChild() != null) {
+			n1.setKey(n1.getRightChild().getKey());
+			n0 = n1;
+			n1 = n1.getRightChild();
+			nodeRemover(n0, n1);
+		} else if (n1.getLeftChild() != null) {
+			n1.setKey(n1.getLeftChild().getKey());
+			n0 = n1;
+			n1 = n1.getLeftChild();
+			nodeRemover(n0, n1);
 		} else {
-			if (n.getLeftChild() == null) {
-				return;
-			} else if (key == n.getLeftChild().getKey()) {
-				if (hasChildren(n.getLeftChild())) {
-					nodeRemover(n.getLeftChild());
-				} else {
-					n.setRightChild(null);
-				}
-			} else {
-				removeSearcher(key, n.getLeftChild());
+			if (n1.equals(n0.getRightChild())) {
+				n0.setRightChild(null);
+			} else if (n1.equals(n0.getLeftChild())) {
+				n0.setLeftChild(null);
 			}
 		}
-
-	}
-
-	private void nodeRemover(Node n) {
-		n.setKey(n.getRightChild().getKey());
 	}
 
 	public LinkedList<Integer> inOrderTraversal() {
