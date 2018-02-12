@@ -36,15 +36,7 @@ public class BinarySearchTree implements Tree {
 	@Override
 	public boolean contains(int key) {
 		return contains(key, root);
-		// if(root == null){
-		// return false;
-		// }
-		// if(root.getKey()==key){
-		// return true;
-		// }
-		// else{
-		// return this.contains(key,root);
-		// }
+		
 	}
 
 	private boolean contains(int key, Node n) {
@@ -64,8 +56,8 @@ public class BinarySearchTree implements Tree {
 	public void remove(int key) {
 		Node n0 = null;
 		Node n1 = root;
-		//boolean found = false;
-		if(key == root.getKey()){
+		// boolean found = false;
+		if (key == root.getKey()) {
 			root = null;
 			return;
 		}
@@ -111,7 +103,6 @@ public class BinarySearchTree implements Tree {
 	private LinkedList<Integer> inOrderTraversal(Node n) {
 
 		java.util.LinkedList<Integer> values = new java.util.LinkedList<>();
-		Node currentNode = n;
 
 		if (n.getLeftChild() != null) {
 			values.addAll(inOrderTraversal(n.getLeftChild()));
@@ -123,9 +114,4 @@ public class BinarySearchTree implements Tree {
 
 		return values;
 	}
-
-	private boolean hasChildren(Node n) {
-		return !(n.getLeftChild() == null && n.getRightChild() == null);
-	}
-
 }
