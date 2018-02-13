@@ -2,7 +2,7 @@ package main;
 
 import java.util.LinkedList;
 
-public interface Tree {
+public interface Tree{
 	public abstract void insert(int n);
 
 	public abstract boolean contains(int key);

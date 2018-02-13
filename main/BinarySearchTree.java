@@ -7,36 +7,25 @@ public class BinarySearchTree implements Tree {
 
 	@Override
 	public void insert(int key) {
-		Node currentNode = root;
-		boolean inserted = false;
-		if (root == null) {
-			root = new Node(key);
-			inserted = true;
-		}
-		while (!inserted) {
-			if (key < currentNode.getKey()) {
-				if (currentNode.getLeftChild() == null) {
-					currentNode.setLeftChild(new Node(key));
-					inserted = true;
-				} else {
-					currentNode = currentNode.getLeftChild();
-				}
-			} else {
-				if (currentNode.getRightChild() == null) {
-					currentNode.setRightChild(new Node(key));
-					inserted = true;
-				} else {
-					currentNode = currentNode.getRightChild();
-				}
-			}
-		}
+		root = insert(key, root);
 
+	}
+
+	private Node insert(int key, Node cRoot) {
+		if (cRoot == null) {
+			return new Node(key);
+		} else if (key > cRoot.getKey()) {
+			cRoot.setRightChild(insert(key, cRoot.getRightChild()));
+		} else if (key <= cRoot.getKey()) {
+			cRoot.setLeftChild(insert(key, cRoot.getLeftChild()));
+		}
+		return cRoot;
 	}
 
 	@Override
 	public boolean contains(int key) {
 		return contains(key, root);
-		
+
 	}
 
 	private boolean contains(int key, Node n) {
